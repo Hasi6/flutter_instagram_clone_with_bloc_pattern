@@ -1,23 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_clone/src/Bloc/BottomBarNavigation/BottmNavigationProvider.dart';
+import 'package:insta_clone/src/Bloc/BottomBarNavigation/BottomNavigationBloc.dart';
+import 'package:insta_clone/src/screens/HomeScreen/PostsList/PostsList.dart';
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int index = 0;
-
-  void onTapped(number) {
-    setState(() {
-      index = number;
-    });
-  }
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -25,7 +17,17 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           backgroundColor: Colors.greenAccent,
         ),
-        bottomNavigationBar: BottomNavigationBar(
+        body: PostsList(),
+        bottomNavigationBar: bottomNavigation(bloc),
+      ),
+    );
+  }
+
+  Widget bottomNavigation(BottomNavigationBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.numbers,
+      builder: (context, snapshot) {
+        return BottomNavigationBar(
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
@@ -40,10 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text('User'),
               ),
             ],
-            currentIndex: index,
+            currentIndex: snapshot.data,
             selectedItemColor: Colors.greenAccent[400],
-            onTap: onTapped),
-      ),
+            onTap: (i) {
+              bloc.changeIndex(i);
+            });
+      },
     );
   }
 }
