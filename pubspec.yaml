@@ -28,6 +28,7 @@ dependencies:
   firebase_database: ^3.1.1
   firebase_storage: ^3.1.0
   rxdart: ^0.22.6
+  flutter_google_places: ^0.2.3
 
 dev_dependencies:
   flutter_test:

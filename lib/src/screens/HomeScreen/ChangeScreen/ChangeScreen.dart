@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:insta_clone/src/screens/HomeScreen/FeedScreen/FeedScreen.dart';
+import 'package:insta_clone/src/screens/HomeScreen/UploadScreen/UploadScreen.dart';
 import 'package:insta_clone/src/screens/HomeScreen/UserScreen/UserScreen.dart';
-import 'package:insta_clone/src/screens/UploadScreen/UploadScreen.dart';
 
 Widget changeScreen(index) {
   if (index == 1) {
