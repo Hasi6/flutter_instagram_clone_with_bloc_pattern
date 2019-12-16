@@ -12,10 +12,11 @@ Widget uploadScreen(BuildContext context) {
         onTap: () async {
           Prediction p = await PlacesAutocomplete.show(
               context: context,
-              apiKey: kGoogleApiKey,
+              apiKey: "AIzaSyDfc3fsuRVv0wrp3FfPqrtdbtsY5YQQl2k",
               mode: Mode.overlay, // Mode.fullscreen
               language: "fr",
-              components: [new Component(Component.country, "fr")]);
+              components: [new Component(Component.country, "lk")]);
+          print(p.placeId.toString());
         },
         decoration: InputDecoration(
             hintText: "Places",

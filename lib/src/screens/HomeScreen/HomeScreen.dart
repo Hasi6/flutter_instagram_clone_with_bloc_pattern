@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         body: StreamBuilder(
           stream: bloc.numbers,
           builder: (context, snapshot) {
-            return changeScreen(snapshot.data);
+            return changeScreen(snapshot.data, context);
           },
         ),
         bottomNavigationBar: bottomNavigation(bloc),
