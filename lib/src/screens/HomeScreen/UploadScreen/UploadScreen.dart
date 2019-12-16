@@ -1,15 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:google_maps_webservice/places.dart';
 
-Widget uploadScreen() {
+Widget uploadScreen(BuildContext context) {
   return Scaffold(
     body: Container(
+      margin: EdgeInsets.only(top: 10.0),
       height: 42.0,
       child: TextField(
+        onTap: () async {
+          Prediction p = await PlacesAutocomplete.show(
+              context: context,
+              apiKey: kGoogleApiKey,
+              mode: Mode.overlay, // Mode.fullscreen
+              language: "fr",
+              components: [new Component(Component.country, "fr")]);
+        },
         decoration: InputDecoration(
             hintText: "Places",
             hintStyle: TextStyle(fontSize: 16, color: Colors.black),
-            prefixIcon: Icon(Icons.place)),
+            prefixIcon: Icon(Icons.search),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            focusedBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+            fillColor: Colors.grey,
+            filled: true),
       ),
     ),
     floatingActionButton: FloatingActionButton(
