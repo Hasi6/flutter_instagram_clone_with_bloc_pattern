@@ -16,6 +16,11 @@ class LoginBloc extends Object with Validators{
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changePassword => _password.sink.add;
 
+  void submitData () {
+    print(this._email.value);
+    print(this._password.value);
+  }
+
 
   dispose(){
     _email.close();
