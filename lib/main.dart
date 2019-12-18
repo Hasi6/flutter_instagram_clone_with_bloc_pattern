@@ -5,8 +5,8 @@ import 'package:insta_clone/src/screens/HomeScreen/HomeScreen.dart';
 
 main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
-        '/': (context) => Provider(child: HomeScreen()),
+        '/home': (context) => Provider(child: HomeScreen()),
       },
     ));
