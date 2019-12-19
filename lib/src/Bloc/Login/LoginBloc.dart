@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:insta_clone/src/Validators/AuthValidator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
@@ -7,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = GoogleSignIn();
+final userRef = FirebaseDatabase.instance.reference().child("users");
 
 class LoginBloc extends Object with Validators {
   final _email = BehaviorSubject<String>();
@@ -32,6 +34,7 @@ class LoginBloc extends Object with Validators {
     print("Login");
   }
 
+  // GOOGLE SIGN IN
   Future googleSignIn() async {
     final GoogleSignInAccount googleSignInAccount =
         await _googleSignIn.signIn();
@@ -51,7 +54,12 @@ class LoginBloc extends Object with Validators {
 
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
-    print(user.displayName.toString());
+    print(user.photoUrl);
+    userRef.child(user.uid).set({
+      'username': user.displayName,
+      'signInMethod': 'Google',
+      'image': user.photoUrl
+    });
   }
 
   dispose() {
