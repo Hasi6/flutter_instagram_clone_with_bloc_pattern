@@ -32,6 +32,7 @@ dependencies:
   google_maps_webservice: ^0.0.14
   flutter_map: any
   email_validator: '^1.0.0'
+  google_sign_in: ^4.1.1
 
 dev_dependencies:
   flutter_test:

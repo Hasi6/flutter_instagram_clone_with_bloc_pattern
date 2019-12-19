@@ -14,6 +14,7 @@ class Login extends StatelessWidget {
         child: Container(
             margin: EdgeInsets.all(40.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 emailFiled(bloc),
                 Container(
@@ -21,7 +22,11 @@ class Login extends StatelessWidget {
                 ),
                 passwordField(bloc),
                 submitbutton(bloc),
-                registerPage(context)
+                registerPage(context),
+                Container(
+                  margin: EdgeInsets.only(top: 10.0),
+                ),
+                googleSignIn(bloc)
               ],
             )),
       ),
@@ -85,7 +90,7 @@ class Login extends StatelessWidget {
       builder: (context, snapshot) {
         return RaisedButton(
           disabledColor: Colors.red,
-          child: Text(snapshot.data.toString()),
+          child: Text("Login"),
           color: Colors.blueAccent,
           onPressed: snapshot.hasData ? () => bloc.submitData() : null,
         );
@@ -94,9 +99,21 @@ class Login extends StatelessWidget {
   }
 
   Widget registerPage(BuildContext context) {
-    return RaisedButton(
+    return FlatButton(
       child: Text("Register page"),
       onPressed: () => Navigator.pushReplacementNamed(context, "/register"),
+    );
+  }
+
+  Widget googleSignIn(LoginBloc bloc) {
+    return StreamBuilder(
+      builder: (context, snapshot) {
+        return RaisedButton(
+          child: Text("Google Sign In"),
+          color: Colors.blueAccent,
+          onPressed: () => bloc.googleSignIn(),
+        );
+      },
     );
   }
 }

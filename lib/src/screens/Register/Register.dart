@@ -12,7 +12,12 @@ class Register extends StatelessWidget {
           child: Container(
         margin: EdgeInsets.all(40.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            usernameField(bloc),
+            Container(
+              margin: EdgeInsets.only(top: 10.0),
+            ),
             emailFiled(bloc),
             Container(
               margin: EdgeInsets.only(top: 10.0),
@@ -26,6 +31,30 @@ class Register extends StatelessWidget {
           ],
         ),
       )),
+    );
+  }
+
+  // EMAIL FIELD
+  Widget usernameField(RegisterBloc bloc) {
+    return StreamBuilder(
+      stream: bloc.username,
+      builder: (context, snapshot) {
+        return TextField(
+          onChanged: bloc.changeUsername,
+          decoration: InputDecoration(
+              hintText: "example",
+              hintStyle: TextStyle(fontSize: 16, color: Colors.black),
+              prefixIcon: Icon(Icons.email),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+              focusedBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+              contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+              fillColor: Colors.grey,
+              filled: true,
+              errorText: snapshot.error),
+        );
+      },
     );
   }
 

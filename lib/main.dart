@@ -9,7 +9,7 @@ import 'package:insta_clone/src/screens/Register/Register.dart';
 
 main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/register',
+      initialRoute: '/login',
       routes: {
         '/': (context) => Provider(child: HomeScreen()),
         '/login': (context) => LoginProvider(
