@@ -27,6 +27,7 @@ class Register extends StatelessWidget {
               margin: EdgeInsets.only(top: 10.0),
             ),
             confirmPasswordField(bloc),
+            loginPage(context),
             submitbutton(bloc),
           ],
         ),
@@ -133,6 +134,13 @@ class Register extends StatelessWidget {
     );
   }
 
+  Widget loginPage(BuildContext context) {
+    return FlatButton(
+      child: Text("Login Page"),
+      onPressed: () => Navigator.pushReplacementNamed(context, "/login"),
+    );
+  }
+
   // SUBMIT BUTTON
   Widget submitbutton(RegisterBloc bloc) {
     return StreamBuilder(
@@ -140,7 +148,7 @@ class Register extends StatelessWidget {
       builder: (context, snapshot) {
         return RaisedButton(
           disabledColor: Colors.red,
-          child: Text(snapshot.data.toString()),
+          child: Text("Regitser"),
           color: Colors.blueAccent,
           onPressed: snapshot.hasData ? () => bloc.submitData() : null,
         );

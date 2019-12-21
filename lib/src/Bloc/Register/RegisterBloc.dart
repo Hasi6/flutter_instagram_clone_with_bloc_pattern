@@ -1,7 +1,14 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:insta_clone/src/Validators/AuthValidator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn _googleSignIn = GoogleSignIn();
+final userRef = FirebaseDatabase.instance.reference().child("users");
 
 class RegisterBloc extends Object with Validators {
   final _username = BehaviorSubject<String>();
@@ -29,9 +36,11 @@ class RegisterBloc extends Object with Validators {
   Function(String) get changeConfirmPassword => _confirmpassword.sink.add;
 
   // REGISTER USER
-  void submitData() {
-    print(_email.value);
-    print(_password.value);
+  void submitData() async {
+    var user = await _auth.createUserWithEmailAndPassword(
+        email: _email.value, password: _password.value);
+    final FirebaseUser newUser = user.user;
+    print(newUser);
   }
 
   dispose() {
