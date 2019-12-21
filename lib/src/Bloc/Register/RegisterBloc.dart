@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:insta_clone/src/Validators/AuthValidator.dart';
 import 'package:rxdart/rxdart.dart';
@@ -36,11 +38,22 @@ class RegisterBloc extends Object with Validators {
   Function(String) get changeConfirmPassword => _confirmpassword.sink.add;
 
   // REGISTER USER
-  void submitData() async {
-    var user = await _auth.createUserWithEmailAndPassword(
-        email: _email.value, password: _password.value);
-    final FirebaseUser newUser = user.user;
-    print(newUser);
+  void submitData(BuildContext context) async {
+    try {
+      var user = await _auth.createUserWithEmailAndPassword(
+          email: _email.value, password: _password.value);
+      final FirebaseUser newUser = user.user;
+      await userRef.child(newUser.uid).set({
+        'username': _username.value,
+        'signInMethod': 'Email',
+        'image': "user.photoUrl"
+      });
+      Navigator.pushReplacementNamed(context, '/');
+    } catch (e) {
+      AlertDialog(
+        title: Text("data"),
+      );
+    }
   }
 
   dispose() {

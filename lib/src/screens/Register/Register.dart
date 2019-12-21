@@ -150,7 +150,7 @@ class Register extends StatelessWidget {
           disabledColor: Colors.red,
           child: Text("Regitser"),
           color: Colors.blueAccent,
-          onPressed: snapshot.hasData ? () => bloc.submitData() : null,
+          onPressed: snapshot.hasData ? () => bloc.submitData(context) : null,
         );
       },
     );
