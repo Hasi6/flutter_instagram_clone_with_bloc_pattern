@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://hasitha:Freedom6@cluster0-zcrw6.gcp.mongodb.net/test?retryWrites=true&w=majority"
+}
