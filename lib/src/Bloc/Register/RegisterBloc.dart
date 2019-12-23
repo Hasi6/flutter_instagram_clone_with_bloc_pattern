@@ -56,7 +56,7 @@ class RegisterBloc extends Object with Validators {
           '{"username": "${_username.value}", "signInMethod}":"Email", "email":"${_email.value}"';
       http.Response response =
           await http.post(endPoint, headers: headers, body: json);
-
+      // name
       Navigator.pushReplacementNamed(context, '/');
     } catch (e) {
       AlertDialog(
