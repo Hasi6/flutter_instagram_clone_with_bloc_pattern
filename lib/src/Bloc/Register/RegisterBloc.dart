@@ -7,10 +7,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:insta_clone/src/Validators/AuthValidator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:http/http.dart' as http;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = GoogleSignIn();
 final userRef = FirebaseDatabase.instance.reference().child("users");
+
+const endPoint = 'http://192.168.8.103:5000/addUser';
 
 class RegisterBloc extends Object with Validators {
   final _username = BehaviorSubject<String>();
@@ -39,15 +42,21 @@ class RegisterBloc extends Object with Validators {
 
   // REGISTER USER
   void submitData(BuildContext context) async {
+    // _auth.createUserWithEmailAndPassword(
+    //       email: _email.value, password: _password.value);
+    //   final FirebaseUser newUser = user.user;
+    //   await userRef.child(newUser.uid).set({
+    //     'username': _username.value,
+    //     'signInMethod': 'Email',
+    //     'image': "user.photoUrl"
+    //   });
     try {
-      var user = await _auth.createUserWithEmailAndPassword(
-          email: _email.value, password: _password.value);
-      final FirebaseUser newUser = user.user;
-      await userRef.child(newUser.uid).set({
-        'username': _username.value,
-        'signInMethod': 'Email',
-        'image': "user.photoUrl"
-      });
+      Map<String, String> headers = {"Content-type": "application/json"};
+      String json =
+          '{"username": "${_username.value}", "signInMethod}":"Email", "email":"${_email.value}"';
+      http.Response response =
+          await http.post(endPoint, headers: headers, body: json);
+
       Navigator.pushReplacementNamed(context, '/');
     } catch (e) {
       AlertDialog(

@@ -13,6 +13,7 @@ app.use(
 );
 
 // MODELS
+require("./models/User");
 
 // Database Connection
 connectDB();
@@ -31,6 +32,7 @@ server.listen(PORT, () => console.log(`App Started at port ${PORT}`));
 // GET
 
 // POST
+require("./routes/user/addUser")(app);
 
 // UPDATE
 
