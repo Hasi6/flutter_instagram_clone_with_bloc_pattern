@@ -4,9 +4,9 @@ const userDao = new UserDao();
 
 const addUser = app => {
   app.post("/addUser", async (req, res) => {
-    console.log(res.body);
+    console.log(req.body);
     try {
-      return res.json(userDao.addUser(JSON.parse(req.body)));
+      return res.json(userDao.addUser(req.body));
     } catch (err) {
       console.error(err.message);
     }

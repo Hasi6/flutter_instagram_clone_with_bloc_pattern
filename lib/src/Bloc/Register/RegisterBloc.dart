@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,8 +43,6 @@ class RegisterBloc extends Object with Validators {
 
   // REGISTER USER
   void submitData(BuildContext context) async {
-    // _auth.createUserWithEmailAndPassword(
-    //       email: _email.value, password: _password.value);
     //   final FirebaseUser newUser = user.user;
     //   await userRef.child(newUser.uid).set({
     //     'username': _username.value,
@@ -51,17 +50,28 @@ class RegisterBloc extends Object with Validators {
     //     'image': "user.photoUrl"
     //   });
     try {
-      Map<String, String> headers = {"Content-type": "application/json"};
-      String json =
-          '{"username": "${_username.value}", "signInMethod}":"Email", "email":"${_email.value}"';
-      http.Response response =
-          await http.post(endPoint, headers: headers, body: json);
+      var user = await _auth.createUserWithEmailAndPassword(
+          email: _email.value, password: _password.value);
+      Map headers = {'Content-type': 'application/json'};
+      // json(Map<String, String> parsedJson) {
+      //   return;
+      // }
+
+      // ;
+
+      print(user.toString());
+
+      http.Response response = await http.post(endPoint,
+          body: jsonEncode({
+            'username': _username.value,
+            'email': _email.value,
+            'signInMethod': 'email',
+          }),
+          headers: {'Content-Type': 'application/json'});
       // name
       Navigator.pushReplacementNamed(context, '/');
     } catch (e) {
-      AlertDialog(
-        title: Text("data"),
-      );
+      print(e);
     }
   }
 

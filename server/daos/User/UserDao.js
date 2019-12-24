@@ -5,9 +5,10 @@ const md5 = require("md5");
 class UserDao {
   // Add User
   addUser = async data => {
+    console.log(data);
     const { email, password, username } = data;
 
-    const image = `https://gravatar.com/avatar/${md5(body.email)}?d=identicon`;
+    const image = `https://gravatar.com/avatar/${md5(email)}?d=identicon`;
     try {
       const newUser = new User({
         email,
