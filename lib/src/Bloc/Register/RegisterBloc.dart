@@ -52,22 +52,24 @@ class RegisterBloc extends Object with Validators {
     try {
       var user = await _auth.createUserWithEmailAndPassword(
           email: _email.value, password: _password.value);
-      Map headers = {'Content-type': 'application/json'};
+      var headers = {'Content-type': 'application/json'};
       // json(Map<String, String> parsedJson) {
       //   return;
       // }
 
       // ;
 
-      print(user.toString());
-
-      http.Response response = await http.post(endPoint,
-          body: jsonEncode({
+      var body = jsonEncode({
             'username': _username.value,
             'email': _email.value,
             'signInMethod': 'email',
-          }),
-          headers: {'Content-Type': 'application/json'});
+          })
+
+      print(user.toString());
+
+      http.Response response = await http.post(endPoint,
+          body:body ,
+          headers: headers);
       // name
       Navigator.pushReplacementNamed(context, '/');
     } catch (e) {
