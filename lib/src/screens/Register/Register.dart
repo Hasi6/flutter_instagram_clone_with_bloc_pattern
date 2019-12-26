@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:insta_clone/src/Bloc/Register/RegisterBloc.dart';
 import 'package:insta_clone/src/Bloc/Register/RegisterProvider.dart';
+import 'package:insta_clone/src/Bloc/UserDetails/UserDetailsProvider.dart';
 
 class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = RegisterProvider.of(context);
+    final userBloc = UserProvider.of(context);
+
+    Registers() {
+      print(userBloc.user.listen((onData) {
+        return (onData.values);
+      }));
+    }
+
+    Registers();
 
     return Scaffold(
       body: Center(
