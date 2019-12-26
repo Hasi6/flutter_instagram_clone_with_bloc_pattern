@@ -162,7 +162,10 @@ class Register extends StatelessWidget {
         stream: bloc.error,
         builder: (context, snapshot) {
           return Center(
-            child: Text(snapshot.hasData ? snapshot.data : ""),
+            child: Text(
+              snapshot.hasData ? snapshot.data : "",
+              style: TextStyle(color: Colors.red),
+            ),
           );
         });
   }
