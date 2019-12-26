@@ -29,6 +29,7 @@ class Register extends StatelessWidget {
             confirmPasswordField(bloc),
             loginPage(context),
             submitbutton(bloc),
+            displayErrors(bloc)
           ],
         ),
       )),
@@ -154,5 +155,15 @@ class Register extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget displayErrors(RegisterBloc bloc) {
+    return StreamBuilder(
+        stream: bloc.error,
+        builder: (context, snapshot) {
+          return Center(
+            child: Text(snapshot.hasData ? snapshot.data : ""),
+          );
+        });
   }
 }
