@@ -23,6 +23,16 @@ class UserDao {
       console.error(err.message);
     }
   };
+
+  // Find User By Email
+  findUserByEmail = async email => {
+    try {
+      const user = User.findOne({ email });
+      return user;
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 }
 
 module.exports = UserDao;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta_clone/src/Bloc/Register/RegisterBloc.dart';
 import 'package:insta_clone/src/Bloc/Register/RegisterProvider.dart';
+import 'package:insta_clone/src/Bloc/UserDetails/UserDetailesBloc.dart';
 import 'package:insta_clone/src/Bloc/UserDetails/UserDetailsProvider.dart';
 
 class Register extends StatelessWidget {
@@ -10,8 +11,8 @@ class Register extends StatelessWidget {
     final userBloc = UserProvider.of(context);
 
     Registers() {
-      print(userBloc.user.listen((onData) {
-        return (onData.values);
+      print(userBloc.email.listen((onData) {
+        return (onData);
       }));
     }
 
@@ -38,7 +39,7 @@ class Register extends StatelessWidget {
             ),
             confirmPasswordField(bloc),
             loginPage(context),
-            submitbutton(bloc),
+            submitbutton(bloc, userBloc),
             displayErrors(bloc)
           ],
         ),
@@ -153,16 +154,22 @@ class Register extends StatelessWidget {
   }
 
   // SUBMIT BUTTON
-  Widget submitbutton(RegisterBloc bloc) {
+  Widget submitbutton(RegisterBloc bloc, UserBloc userBloc) {
+    // return StreamBuilder(
+    //   stream: bloc.submitValid,
+    //   builder: (context, snapshot) {
+    //     return RaisedButton(
+    //       disabledColor: Colors.red,
+    //       child: Text("Regitser"),
+    //       color: Colors.blueAccent,
+    //       onPressed: snapshot.hasData ? () => bloc.submitData(context) : null,
+    //     );
+    //   },
+    // );
     return StreamBuilder(
-      stream: bloc.submitValid,
+      stream: userBloc.email,
       builder: (context, snapshot) {
-        return RaisedButton(
-          disabledColor: Colors.red,
-          child: Text("Regitser"),
-          color: Colors.blueAccent,
-          onPressed: snapshot.hasData ? () => bloc.submitData(context) : null,
-        );
+        return Text(snapshot.data);
       },
     );
   }
