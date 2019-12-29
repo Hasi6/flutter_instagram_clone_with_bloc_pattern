@@ -66,12 +66,12 @@ class LoginBloc extends Object with Validators {
 
     http.Response response = await http.post("${config.endPoint}/addUser",
         body: body, headers: config.headers);
-    print(user.photoUrl);
-    userRef.child(user.uid).set({
-      'username': user.displayName,
-      'signInMethod': 'Google',
-      'image': user.photoUrl
-    });
+    // print(user.photoUrl);
+    // userRef.child(user.uid).set({
+    //   'username': user.displayName,
+    //   'signInMethod': 'Google',
+    //   'image': user.photoUrl
+    // });
   }
 
   dispose() {

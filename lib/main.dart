@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:insta_clone/src/Bloc/BottomBarNavigation/BottmNavigationProvider.dart';
 import 'package:insta_clone/src/Bloc/Login/LoginProvider.dart';
 import 'package:insta_clone/src/Bloc/Register/RegisterProvider.dart';
+import 'package:insta_clone/src/Bloc/UploadImage/UploadImageProvider.dart';
 import 'package:insta_clone/src/Bloc/UserDetails/UserDetailsProvider.dart';
 import 'package:insta_clone/src/screens/HomeScreen/HomeScreen.dart';
 import 'package:insta_clone/src/screens/Login/Login.dart';
@@ -13,7 +14,9 @@ main() => runApp(UserProvider(
         debugShowCheckedModeBanner: false,
         initialRoute: '/register',
         routes: {
-          '/': (context) => Provider(child: HomeScreen()),
+          '/': (context) => UploadPostProvider(
+                child: Provider(child: HomeScreen()),
+              ),
           '/login': (context) => LoginProvider(
                 child: Login(),
               ),
