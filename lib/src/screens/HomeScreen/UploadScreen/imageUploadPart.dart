@@ -6,8 +6,13 @@ import 'package:insta_clone/src/Bloc/UploadImage/UploadImageProvider.dart';
 Widget imageUpload(BuildContext context) {
   final bloc = UploadPostProvider.of(context);
 
-  Future getImage() async {
+  Future getImageByCamera() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    bloc.changeImage(image);
+  }
+
+  Future getImageByGallery() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     bloc.changeImage(image);
   }
 
@@ -18,15 +23,25 @@ Widget imageUpload(BuildContext context) {
         return snapshot.data != null
             ? Text("")
             : RaisedButton(
-                child: Text("Select Image"),
-                onPressed: getImage,
+                child: Text("Capture Image"),
+                onPressed: getImageByCamera,
               );
       },
     );
   }
 
-  Widget uploadButton(){
-    return StreamBuilder()
+  Widget uploadButton() {
+    return StreamBuilder(
+      stream: bloc.image,
+      builder: (context, snapshot) {
+        return snapshot.data != null
+            ? RaisedButton(
+                child: Text("Upload Image"),
+                onPressed: getImageByCamera,
+              )
+            : Text("");
+      },
+    );
   }
 
   Widget buttonGallery() {
@@ -37,7 +52,7 @@ Widget imageUpload(BuildContext context) {
             ? Text("")
             : RaisedButton(
                 child: Text("Select Image"),
-                onPressed: getImage,
+                onPressed: getImageByGallery,
               );
       },
     );
@@ -55,7 +70,8 @@ Widget imageUpload(BuildContext context) {
           },
         ),
         buttonCamera(),
-        buttonGallery()
+        buttonGallery(),
+        uploadButton()
       ],
     ),
   );
