@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta_clone/src/Bloc/Login/LoginBloc.dart';
 import 'package:insta_clone/src/Bloc/Login/LoginProvider.dart';
+import 'package:insta_clone/src/Bloc/UserDetails/UserDetailsProvider.dart';
 
 class Login extends StatelessWidget {
   const Login({Key key}) : super(key: key);
@@ -8,6 +9,9 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = LoginProvider.of(context);
+    final userBloc = UserProvider.of(context);
+
+    userBloc.getUserData(context);
 
     return Scaffold(
       body: Center(

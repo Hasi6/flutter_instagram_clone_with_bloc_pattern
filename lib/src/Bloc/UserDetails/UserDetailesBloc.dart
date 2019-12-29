@@ -33,20 +33,32 @@ class UserBloc {
 
   UserBloc() {
     WidgetsFlutterBinding.ensureInitialized();
-    getUserData();
   }
 
-  Future<FirebaseUser> getUserData() async {
+  Future<FirebaseUser> getUserData(BuildContext context) async {
     var user = await _auth.currentUser();
     if (user != null) {
       changeEmail(user.email.toString());
       http.Response response =
           await http.get("${config.endPoint}/user/${user.email.toString()}");
       User userModel = User.fromJson(jsonDecode(response.body));
-      print(userModel.id);
       changeId(userModel.id);
       changeUser(userModel);
-      print(_user.value.email);
+      if (userModel.id.toString().isNotEmpty) {
+        Navigator.pushReplacementNamed(context, "/");
+      }
+    }
+  }
+
+  checkAuthStates(BuildContext context) async {
+    Navigator.pushReplacementNamed(context, "/login");
+    try {
+      print(_user.value.id);
+      if (true) {
+        print("Hasi");
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

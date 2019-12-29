@@ -10,9 +10,11 @@ class Register extends StatelessWidget {
     final bloc = RegisterProvider.of(context);
     final userBloc = UserProvider.of(context);
 
+    userBloc.getUserData(context);
+
     Registers() {
       print(userBloc.email.listen((onData) {
-        return (onData);
+        return onData.toString();
       }));
     }
 
@@ -167,9 +169,9 @@ class Register extends StatelessWidget {
     //   },
     // );
     return StreamBuilder(
-      stream: userBloc.email,
+      stream: userBloc.user,
       builder: (context, snapshot) {
-        return Text(snapshot.data);
+        return Text(snapshot.data.id.toString());
       },
     );
   }
