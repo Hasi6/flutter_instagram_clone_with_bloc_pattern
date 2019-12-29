@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:insta_clone/src/Validators/AuthValidator.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'package:insta_clone/src/config/config.dart' as config;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -54,6 +57,15 @@ class LoginBloc extends Object with Validators {
 
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
+
+    var body = jsonEncode({
+      'username': user.displayName,
+      'email': user.email,
+      'signInMethod': 'google',
+    });
+
+    http.Response response = await http.post("${config.endPoint}/addUser",
+        body: body, headers: config.headers);
     print(user.photoUrl);
     userRef.child(user.uid).set({
       'username': user.displayName,

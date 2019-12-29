@@ -66,8 +66,6 @@ class RegisterBloc extends Object with Validators {
 
       http.Response response = await http.post("${config.endPoint}/addUser",
           body: body, headers: config.headers);
-
-      print(jsonDecode(response.body).toString());
       // name
       Navigator.pushReplacementNamed(context, '/');
     } catch (e) {
