@@ -14,6 +14,7 @@ class PostsDao {
       });
 
       await newPost.save();
+      return newPost;
     } catch (err) {
       console.error(err.message);
     }
