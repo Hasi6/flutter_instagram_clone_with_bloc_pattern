@@ -17,7 +17,6 @@ class UserDao {
       });
 
       await newUser.save();
-      console.log(newUser);
       return newUser;
     } catch (err) {
       console.error(err.message);
