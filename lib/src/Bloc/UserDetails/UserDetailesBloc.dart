@@ -62,6 +62,10 @@ class UserBloc {
     }
   }
 
+  userData() {
+    return _user.value;
+  }
+
   dispose() {
     _username.close();
     _email.close();

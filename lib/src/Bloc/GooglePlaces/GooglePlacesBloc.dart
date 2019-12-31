@@ -11,6 +11,10 @@ class GooglePlacesBloc {
   // ADD DATA TO STREAMS
   Stream<String> get place => _palce;
 
+  String getPlace() {
+    return _palce.value;
+  }
+
   // CHANGE DATA
   Function(String) get changePlace => _palce.sink.add;
 

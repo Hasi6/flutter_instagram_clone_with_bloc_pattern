@@ -37,7 +37,7 @@ Widget imageUpload(BuildContext context) {
         return snapshot.data != null
             ? RaisedButton(
                 child: Text("Upload Image"),
-                onPressed: bloc.uploadImage,
+                onPressed: () => bloc.uploadImage(context),
               )
             : Text("");
       },

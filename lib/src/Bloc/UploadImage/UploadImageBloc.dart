@@ -1,8 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:insta_clone/src/Bloc/GooglePlaces/GooglePlacesProvider.dart';
+import 'package:insta_clone/src/Bloc/UserDetails/UserDetailsProvider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:http/http.dart' as http;
+import 'package:insta_clone/src/config/config.dart' as config;
 
 StorageReference storageReference =
     FirebaseStorage.instance.ref().child('images');
@@ -16,12 +22,24 @@ class UploadPostBloc {
   // CHANGE DATA
   Function(File) get changeImage => _image.sink.add;
 
-  uploadImage() async {
+  uploadImage(BuildContext context) async {
     StorageUploadTask uploadTask = storageReference.putFile(_image.value);
     await uploadTask.onComplete;
-    print('File Uploaded');
-    storageReference.getDownloadURL().then((fileURL) {
-      print(fileURL);
+
+    var placeBloc = GooglePlacesProvider.of(context);
+    var userBloc = UserProvider.of(context);
+    var location = placeBloc.getPlace();
+
+    storageReference.getDownloadURL().then((fileURL) async {
+      // var body = jsonEncode({
+      //   'user': user,
+      //   'caption': caption,
+      //   'location': location,
+      //   'image': fileURL
+      // });
+
+      // http.Response response = await http.post("${config.endPoint}/app/addUser",
+      //     body: body, headers: config.headers);
     });
   }
 
