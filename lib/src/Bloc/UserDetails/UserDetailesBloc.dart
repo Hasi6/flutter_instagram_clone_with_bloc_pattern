@@ -50,6 +50,10 @@ class UserBloc {
     }
   }
 
+  sendUserData() {
+    return _user.value;
+  }
+
   checkAuthStates(BuildContext context) async {
     Navigator.pushReplacementNamed(context, "/login");
     try {

@@ -14,6 +14,7 @@ app.use(
 
 // MODELS
 require("./models/User");
+require("./models/Posts");
 
 // Database Connection
 connectDB();
@@ -34,6 +35,7 @@ require("./routes/user/findUserByEmail")(app);
 
 // POST
 require("./routes/user/addUser")(app);
+require("./routes/posts/addPost")(app);
 
 // UPDATE
 

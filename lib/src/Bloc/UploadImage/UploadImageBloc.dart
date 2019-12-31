@@ -30,16 +30,19 @@ class UploadPostBloc {
     var userBloc = UserProvider.of(context);
     var location = placeBloc.getPlace();
 
-    storageReference.getDownloadURL().then((fileURL) async {
-      // var body = jsonEncode({
-      //   'user': user,
-      //   'caption': caption,
-      //   'location': location,
-      //   'image': fileURL
-      // });
+    var user = userBloc.sendUserData();
+    print(user.id);
 
-      // http.Response response = await http.post("${config.endPoint}/app/addUser",
-      //     body: body, headers: config.headers);
+    storageReference.getDownloadURL().then((fileURL) async {
+      var body = jsonEncode({
+        'user': user.id,
+        'caption': "caption",
+        'location': location,
+        'image': fileURL
+      });
+
+      http.Response response = await http.post("${config.endPoint}/api/addPost",
+          body: body, headers: config.headers);
     });
   }
 
