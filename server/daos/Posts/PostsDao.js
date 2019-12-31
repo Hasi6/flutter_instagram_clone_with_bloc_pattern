@@ -30,9 +30,9 @@ class PostsDao {
   };
 
   // Get Post By Id
-  getPost = async _id => {
+  getPostById = async _id => {
     try {
-      const post = await Posts.findById(id);
+      const post = await Posts.findById(_id);
       return post;
     } catch (err) {
       console.error(err.message);
