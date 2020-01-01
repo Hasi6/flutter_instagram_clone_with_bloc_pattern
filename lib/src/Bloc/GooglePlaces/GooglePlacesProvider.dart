@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:insta_clone/src/Bloc/BottomBarNavigation/BottmNavigationProvider.dart';
 import 'package:insta_clone/src/Bloc/GooglePlaces/GooglePlacesBloc.dart';
 
 class GooglePlacesProvider extends InheritedWidget {

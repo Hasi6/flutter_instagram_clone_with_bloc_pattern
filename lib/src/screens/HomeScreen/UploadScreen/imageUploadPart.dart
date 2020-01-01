@@ -23,7 +23,8 @@ Widget imageUpload(BuildContext context) {
         return snapshot.data != null
             ? Text("")
             : RaisedButton(
-                child: Text("Capture Image"),
+                color: Colors.white,
+                child: Icon(Icons.camera_alt),
                 onPressed: getImageByCamera,
               );
       },
@@ -51,7 +52,8 @@ Widget imageUpload(BuildContext context) {
         return snapshot.data != null
             ? Text("")
             : RaisedButton(
-                child: Text("Select Image"),
+                color: Colors.white,
+                child: Icon(Icons.photo),
                 onPressed: getImageByGallery,
               );
       },
