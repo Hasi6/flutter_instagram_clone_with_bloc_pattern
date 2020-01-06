@@ -15,9 +15,18 @@ class HomeScreen extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: appBar(bloc),
+          title: SizedBox(
+            height: 25.0,
+            child: appBar(bloc),
+          ),
+          elevation: 1.0,
           centerTitle: true,
-          backgroundColor: Colors.greenAccent,
+          leading: IconButton(
+            icon: Icon(Icons.camera_alt),
+            color: Colors.black,
+            onPressed: () => print("Hasi"),
+          ),
+          backgroundColor: Color(0xfff8faf8),
         ),
         body: StreamBuilder(
           stream: bloc.numbers,
