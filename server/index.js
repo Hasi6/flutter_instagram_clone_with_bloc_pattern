@@ -32,6 +32,7 @@ server.listen(PORT, () => console.log(`App Started at port ${PORT}`));
 
 // GET
 require("./routes/user/findUserByEmail")(app);
+require("./routes/posts/getPosts")(app);
 
 // POST
 require("./routes/user/addUser")(app);
