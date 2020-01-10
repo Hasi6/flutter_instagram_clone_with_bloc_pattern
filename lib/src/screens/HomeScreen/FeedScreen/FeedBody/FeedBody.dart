@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:insta_clone/src/Bloc/Feed/FeedProvider.dart';
 import 'package:insta_clone/src/models/Posts.dart';
 import 'package:insta_clone/src/models/User.dart';
@@ -37,9 +38,19 @@ class FeedBody extends StatelessWidget {
                               image: DecorationImage(
                                   fit: BoxFit.fill,
                                   image: NetworkImage(userModel.image))),
+                        ),
+                        Text(userModel.username,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        IconButton(
+                          icon: Icon(Icons.more_vert),
+                          onPressed: null,
                         )
                       ],
                     ),
+                  ),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Image.network(postModel.image, fit: BoxFit.cover),
                   )
                 ],
               );
