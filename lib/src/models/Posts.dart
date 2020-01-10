@@ -13,7 +13,7 @@ class Post {
     id = parsedJson['_id'];
     location = parsedJson["location"];
     image = parsedJson["image"];
-    user = User.fromJson(jsonDecode(parsedJson['user']));
+    // user = parsedJson['user'];
     caption = parsedJson['caption'];
   }
 }

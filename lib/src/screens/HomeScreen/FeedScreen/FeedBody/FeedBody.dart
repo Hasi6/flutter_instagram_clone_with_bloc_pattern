@@ -14,8 +14,8 @@ class FeedBody extends StatelessWidget {
       child: StreamBuilder(
         stream: bloc.posts,
         builder: (context, snapshot) {
-          Post postModel = Post.fromJson(jsonDecode(snapshot.data));
-          return Text(postModel.toString());
+          Post postModel = Post.fromJson(snapshot.data[0]);
+          return Text(postModel.image.toLowerCase());
         },
       ),
     );

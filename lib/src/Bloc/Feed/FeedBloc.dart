@@ -29,8 +29,8 @@ class FeedBloc {
   getFeeds() async {
     try {
       var response = await http.get("${config.endPoint}/api/getPosts/1");
-      var postModel = jsonDecode(response.body);
-      changePosts(postModel[0]);
+      var postModel = jsonDecode(response.body.toString());
+      changePosts(postModel);
     } catch (e) {
       print(e.message);
     }
