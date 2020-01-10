@@ -16,11 +16,11 @@ class FeedBody extends StatelessWidget {
         stream: bloc.posts,
         builder: (context, snapshot) {
           Post postModel = Post.fromJson(snapshot.data[0]);
-          User userModel = User.fromJson(snapshot.data[0]);
+          User userModel = User.fromJson(snapshot.data[0]['user']);
           return Column(
             children: <Widget>[
-              Text(postModel.id.toString()),
               Text(userModel.image.toString()),
+              // Text(postModel.user.id.toString()),
             ],
           );
         },
