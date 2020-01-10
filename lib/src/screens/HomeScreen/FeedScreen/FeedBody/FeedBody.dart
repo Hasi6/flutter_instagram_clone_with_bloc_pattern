@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:insta_clone/src/Bloc/Feed/FeedProvider.dart';
 import 'package:insta_clone/src/models/Posts.dart';
@@ -15,13 +13,15 @@ class FeedBody extends StatelessWidget {
       child: StreamBuilder(
         stream: bloc.posts,
         builder: (context, snapshot) {
-          Post postModel = Post.fromJson(snapshot.data[0]);
-          User userModel = User.fromJson(snapshot.data[0]['user']);
-          return Column(
-            children: <Widget>[
-              Text(userModel.image.toString()),
-              // Text(postModel.user.id.toString()),
-            ],
+          return ListView.builder(
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              Post postModel = Post.fromJson(snapshot.data[0]);
+              User userModel = User.fromJson(snapshot.data[0]['user']);
+              return Column(
+                children: <Widget>[Text(postModel.image), Text(userModel.id)],
+              );
+            },
           );
         },
       ),
