@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:insta_clone/src/Bloc/Feed/FeedProvider.dart';
+import 'package:insta_clone/src/models/Posts.dart';
 
 class FeedBody extends StatelessWidget {
   const FeedBody({Key key}) : super(key: key);
@@ -11,7 +14,8 @@ class FeedBody extends StatelessWidget {
       child: StreamBuilder(
         stream: bloc.posts,
         builder: (context, snapshot) {
-          return Text("Hasi");
+          Post postModel = Post.fromJson(jsonDecode(snapshot.data));
+          return Text(postModel.toString());
         },
       ),
     );

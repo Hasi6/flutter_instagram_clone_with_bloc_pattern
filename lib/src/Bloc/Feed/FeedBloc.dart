@@ -10,17 +10,17 @@ class Posts {
 }
 
 class FeedBloc {
-  final _posts = BehaviorSubject<Posts>();
+  final _posts = BehaviorSubject<List>();
 
   // ADD DATA TO STREAMS
-  Stream<Posts> get posts => _posts;
+  Stream<List> get posts => _posts;
 
-  Posts getPosts() {
+  List getPosts() {
     return _posts.value;
   }
 
   // CHANGE DATA
-  Function(Posts) get changePosts => _posts.sink.add;
+  Function(List) get changePosts => _posts.sink.add;
 
   FeedBloc() {
     getFeeds();
@@ -29,9 +29,8 @@ class FeedBloc {
   getFeeds() async {
     try {
       var response = await http.get("${config.endPoint}/api/getPosts/1");
-      var postModel = Post.fromJson(jsonDecode(response.body));
-      print(postModel.toString());
-      print("postModel");
+      var postModel = jsonDecode(response.body);
+      changePosts(postModel[0]);
     } catch (e) {
       print(e.message);
     }
