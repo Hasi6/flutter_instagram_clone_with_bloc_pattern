@@ -27,19 +27,21 @@ class FeedBloc {
   }
 
   getFeeds(page) async {
-    try {
-      var response = await http.get("${config.endPoint}/api/getPosts/$page");
-      var postModel = jsonDecode(response.body.toString());
-      var newPosts;
-      if (_posts.value != null) {
-        newPosts = _posts.value + postModel;
-      } else {
-        newPosts = postModel;
+    Timer(Duration(seconds: 4), () async {
+      try {
+        var response = await http.get("${config.endPoint}/api/getPosts/$page");
+        var postModel = jsonDecode(response.body.toString());
+        var newPosts;
+        if (_posts.value != null) {
+          newPosts = _posts.value + postModel;
+        } else {
+          newPosts = postModel;
+        }
+        changePosts(newPosts);
+      } catch (e) {
+        print(e);
       }
-      changePosts(newPosts);
-    } catch (e) {
-      print(e);
-    }
+    });
   }
 
   dispose() {
