@@ -6,15 +6,29 @@ import 'package:insta_clone/src/models/User.dart';
 
 class FeedBody extends StatelessWidget {
   const FeedBody({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    // @override
+    // void dispose() {
+    //   _scrollController.dispose();
+    //   super.dispose();
+    // }
+
     final bloc = FeedProvider.of(context);
+    ScrollController _scrollController = new ScrollController();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        bloc.getFeeds(2);
+      }
+    });
     return Container(
       child: StreamBuilder(
         stream: bloc.posts,
         builder: (context, snapshot) {
           return ListView.builder(
+            controller: _scrollController,
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
               Post postModel = Post.fromJson(snapshot.data[index]);

@@ -23,16 +23,22 @@ class FeedBloc {
   Function(List) get changePosts => _posts.sink.add;
 
   FeedBloc() {
-    getFeeds();
+    getFeeds(1);
   }
 
-  getFeeds() async {
+  getFeeds(page) async {
     try {
-      var response = await http.get("${config.endPoint}/api/getPosts/1");
+      var response = await http.get("${config.endPoint}/api/getPosts/$page");
       var postModel = jsonDecode(response.body.toString());
-      changePosts(postModel);
+      var newPosts;
+      if (_posts.value != null) {
+        newPosts = _posts.value + postModel;
+      } else {
+        newPosts = postModel;
+      }
+      changePosts(newPosts);
     } catch (e) {
-      print(e.message);
+      print(e);
     }
   }
 
