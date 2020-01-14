@@ -13,7 +13,7 @@ Widget changeScreen(index, context) {
     );
   }
   if (index == 2) {
-    return FeedProvider(child: feedScreen());
+    return feedScreen();
   } else {
     return UserProvider(child: usersScreen(context));
   }

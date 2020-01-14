@@ -23,7 +23,9 @@ class FeedBloc {
   Function(List) get changePosts => _posts.sink.add;
 
   FeedBloc() {
-    getFeeds(1);
+    if (_posts.value == null) {
+      getFeeds(1);
+    }
   }
 
   getFeeds(page) async {

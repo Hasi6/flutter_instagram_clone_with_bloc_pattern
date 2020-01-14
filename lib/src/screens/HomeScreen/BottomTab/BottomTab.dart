@@ -10,15 +10,15 @@ Widget bottomNavigation(BottomNavigationBloc bloc) {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              title: Text('Feed'),
+              title: Text(''),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.file_upload),
-              title: Text('Upload'),
+              title: Text(''),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              title: Text('User'),
+              title: Text(''),
             ),
           ],
           currentIndex: snapshot.data,
